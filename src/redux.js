@@ -1,8 +1,6 @@
 import { createStore, combineReducers } from "redux";
 import uuid from "uuid";
 
-// SORT_BY_DATE
-// SORT_BY_AMOUNT
 // SET_START_DATE
 // SET_END_DATE
 
@@ -44,6 +42,16 @@ const sortByDate = () => ({
 
 const sortByAmount = () => ({
   type: "SORT_BY_AMOUNT"
+});
+
+const setStartDate = startDate => ({
+  type: "SET_START_DATE",
+  startDate
+});
+
+const setEndDate = endDate => ({
+  type: "SET_END_DATE",
+  endDate
 });
 
 const expensesReducerDefaultState = [];
@@ -93,6 +101,16 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
         ...state,
         sortBy: "date"
       };
+    case "SET_START_DATE":
+      return {
+        ...state,
+        startDate: action.startDate
+      };
+    case "SET_END_DATE":
+      return {
+        ...state,
+        endDate: action.endDate
+      };
     default:
       return state;
   }
@@ -109,22 +127,26 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
-const testExpense1 = store.dispatch(
-  addExpense({ description: "test", amount: 100 })
-);
-const testExpense2 = store.dispatch(
-  addExpense({ description: "test2", amount: 300 })
-);
+// const testExpense1 = store.dispatch(
+//   addExpense({ description: "test", amount: 100 })
+// );
+// const testExpense2 = store.dispatch(
+//   addExpense({ description: "test2", amount: 300 })
+// );
 
-store.dispatch(removeExpense({ id: testExpense1.expense.id }));
+// store.dispatch(removeExpense({ id: testExpense1.expense.id }));
 
-store.dispatch(editExpense(testExpense2.expense.id, { amount: 500 }));
+// store.dispatch(editExpense(testExpense2.expense.id, { amount: 500 }));
 
-store.dispatch(setTextFilter("test2"));
-store.dispatch(setTextFilter(""));
+// store.dispatch(setTextFilter("test2"));
+// store.dispatch(setTextFilter(""));
 
-store.dispatch(sortByAmount());
-store.dispatch(sortByDate());
+// store.dispatch(sortByAmount());
+// store.dispatch(sortByDate());
+
+store.dispatch(setStartDate(125));
+store.dispatch(setStartDate());
+store.dispatch(setEndDate(1250));
 
 const state = {
   expenses: [
