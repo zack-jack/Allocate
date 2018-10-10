@@ -1,8 +1,6 @@
 import { createStore, combineReducers } from "redux";
 import uuid from "uuid";
 
-// EDIT_EXPENSE
-// SET_TEXT_FILTER
 // SORT_BY_DATE
 // SORT_BY_AMOUNT
 // SET_START_DATE
@@ -38,6 +36,14 @@ const editExpense = (id, updates) => ({
 const setTextFilter = (text = "") => ({
   type: "SET_TEXT_FILTER",
   text
+});
+
+const sortByDate = () => ({
+  type: "SORT_BY_DATE"
+});
+
+const sortByAmount = () => ({
+  type: "SORT_BY_AMOUNT"
 });
 
 const expensesReducerDefaultState = [];
@@ -77,6 +83,16 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
         ...state,
         text: action.text
       };
+    case "SORT_BY_AMOUNT":
+      return {
+        ...state,
+        sortBy: "amount"
+      };
+    case "SORT_BY_DATE":
+      return {
+        ...state,
+        sortBy: "date"
+      };
     default:
       return state;
   }
@@ -106,6 +122,9 @@ store.dispatch(editExpense(testExpense2.expense.id, { amount: 500 }));
 
 store.dispatch(setTextFilter("test2"));
 store.dispatch(setTextFilter(""));
+
+store.dispatch(sortByAmount());
+store.dispatch(sortByDate());
 
 const state = {
   expenses: [
