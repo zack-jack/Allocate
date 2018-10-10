@@ -1,9 +1,6 @@
 import { createStore, combineReducers } from "redux";
 import uuid from "uuid";
 
-// SET_START_DATE
-// SET_END_DATE
-
 const addExpense = ({
   description = "",
   note = "",
@@ -116,6 +113,20 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
   }
 };
 
+const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
+  return expenses.filter(expense => {
+    const startDateMatch =
+      typeof startDate !== "number" || expense.createdAt >= startDate;
+    const endDateMatch =
+      typeof endDate !== "number" || expense.createdAt <= endDate;
+    const textMatch = expense.description
+      .toLowerCase()
+      .includes(text.toLowerCase());
+
+    return startDateMatch && endDateMatch && textMatch;
+  });
+};
+
 const store = createStore(
   combineReducers({
     expenses: expensesReducer,
@@ -124,14 +135,16 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  console.log(store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
 });
 
 // const testExpense1 = store.dispatch(
-//   addExpense({ description: "test", amount: 100 })
+//   addExpense({ description: "test", amount: 100, createdAt: 1000 })
 // );
 // const testExpense2 = store.dispatch(
-//   addExpense({ description: "test2", amount: 300 })
+//   addExpense({ description: "test2", amount: 300, createdAt: -1000 })
 // );
 
 // store.dispatch(removeExpense({ id: testExpense1.expense.id }));
@@ -144,9 +157,9 @@ store.subscribe(() => {
 // store.dispatch(sortByAmount());
 // store.dispatch(sortByDate());
 
-store.dispatch(setStartDate(125));
-store.dispatch(setStartDate());
-store.dispatch(setEndDate(1250));
+// store.dispatch(setStartDate(125));
+// store.dispatch(setStartDate());
+// store.dispatch(setEndDate(1250));
 
 const state = {
   expenses: [
