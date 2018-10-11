@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "dev-server": "webpack-dev-server --watch"
+    "dev-server": "webpack-dev-server --watch",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/cli": "^7.1.2",
@@ -16,24 +17,30 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "css-loader": "0.28.4",
-    "moment": "2.18.1",
+    "jest": "^23.6.0",
+    "moment": "2.19.3",
     "node-sass": "4.5.3",
     "normalize.css": "7.0.0",
     "react": "16.0.0",
     "react-addons-shallow-compare": "15.6.0",
     "react-dates": "12.3.0",
     "react-dom": "16.0.0",
-    "react-modal": "2.2.2",
     "react-redux": "5.0.5",
     "react-router-dom": "4.2.2",
     "redux": "3.7.2",
+    "regenerator-runtime": "^0.12.1",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
     "uuid": "3.1.0",
     "validator": "^10.8.0",
     "webpack": "3.1.0",
     "webpack-dev-server": "2.5.1"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
   }
 }
