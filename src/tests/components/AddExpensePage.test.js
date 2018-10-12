@@ -17,7 +17,7 @@ test("should render AddExpensePage correctly", () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-test("should handle onSubmit", () => {
+test("should handle addExpense", () => {
   wrapper.find("ExpenseForm").prop("onSubmit")(expenses[1]);
   expect(history.push).toHaveBeenLastCalledWith("/");
   expect(addExpense).toHaveBeenLastCalledWith(expenses[1]);
