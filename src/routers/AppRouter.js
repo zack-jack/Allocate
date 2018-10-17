@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AddExpensePage from "../components/AddExpensePage";
 import AllocateDashboardPage from "../components/AllocateDashboardPage";
 import EditExpensePage from "../components/EditExpensePage";
-import Header from "../components/Header";
+import { Header } from "../components/Header";
 import HelpPage from "../components/HelpPage";
 import LoginPage from "../components/LoginPage";
 import NotFoundPage from "../components/NotFoundPage";
